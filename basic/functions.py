@@ -5,6 +5,7 @@
 # Named arguments
 # passing many arguments
 # return value
+# Lambda function
 
 # defining a function
 def function_name():
@@ -53,3 +54,10 @@ function_many_args_dict(id=1, name="Mark", age=25, country="India", isPerson=Tru
 returned_value = function_returs_sum(10, 90)
 print(returned_value)
 
+# Lambda functions
+
+# Lambda functions are used to execute single line of statements
+# The below lambda function returns the square of passed number
+
+square_val = lambda x : x * 2
+print(square_val(2))
