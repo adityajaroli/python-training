@@ -1,29 +1,39 @@
+import json
 
-# Opens/Creates a file if doesn't exist
-def open_file(file_name="new-file.txt"):
+def add_attendees(attendees):
     try:
-        file = open(file_name, "w")
-        file.close()    
+        with open("attendees.txt", "w") as att_file:
+            json.dump(attendees, att_file)
     except Exception:
-        print("Could not open a file")
+        print("error while writing to file")   
 
-def write_to_file(file_name, text):
+
+def get_attendees():
     try:
-        file = open(file_name, "a")
-        file.write(text+"\n")
-        file.close()
-    except Exception:
-        print("Could not write to the file")    
+        with open("attendees.txt", "r") as att_file:
+            if( len(att_file.readlines()) ) != 0:
+                return json.load(att_file)
+            return []
+    except FileNotFoundError:
+        print("No record found")
+        return []
 
-def read_data_from_file(file_name):
-    try:
-        file = open(file_name, "r")
-        for line in file.readlines():
-            print(line)
-        file.close()
-    except Exception:
-        print("Could not read from the file")    
+def display_attendees():
+    print(get_attendees())
 
-open_file()
-write_to_file("new-file.txt", "This is the first line")
-read_data_from_file("new-file.txt")
+def read_attendee_info():
+    attendees = get_attendees()
+    while True:
+        empid = input("Enter employee id: ")
+        name = input("Enter employee name: ")
+        email = input("Enter employee email: ")
+        attendees.append({ "empid": empid, "name": name, "email": email })
+        print("________________________________________")
+        _continue = input("Do you want to continue? (y/n): ")
+        if _continue.upper() == "N":
+            break
+    add_attendees(attendees)
+
+if __name__ == "__main__":
+    display_attendees()
+    read_attendee_info()

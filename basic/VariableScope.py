@@ -45,5 +45,5 @@ def non_local_keyword():
     
     outer()
     print(x)
-
-non_local_keyword()
+if __name__ == "__main__":
+    non_local_keyword()
